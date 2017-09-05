@@ -1,5 +1,6 @@
 package com.aleksandersh.weather.service;
 
+
 /**
  * Created by AleksanderSh on 18.07.2017.
  * <p>
@@ -7,6 +8,7 @@ package com.aleksandersh.weather.service;
  */
 
 public interface ServiceScheduler {
+
     /**
      * Планирует выполнение задачи с заданным интервалом.
      *

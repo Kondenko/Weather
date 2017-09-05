@@ -1,15 +1,17 @@
 package com.aleksandersh.weather.service;
 
-import android.os.AsyncTask;
 
-import com.aleksandersh.weather.WeatherApplication;
-import com.aleksandersh.weather.di.component.AppComponent;
-import com.aleksandersh.weather.di.module.AppModule;
-import com.aleksandersh.weather.domain.WeatherManager;
+import com.aleksandersh.weather.App;
+import com.aleksandersh.weather.features.city.domain.interactor.CityInteractor;
+import com.aleksandersh.weather.features.weather.domain.interactor.WeatherInteractor;
+import com.aleksandersh.weather.utils.Utils;
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.Disposable;
+
 
 /**
  * Created by AleksanderSh on 18.07.2017.
@@ -18,51 +20,34 @@ import javax.inject.Inject;
  */
 
 public class WeatherUpdatingJobService extends JobService {
+
     static final String TAG = "WeatherUpdatingJobS";
 
     @Inject
-    WeatherManager mWeatherManager;
-    private UpdatingWeatherTask mBackgroundTask;
+    WeatherInteractor weatherInteractor;
+
+    @Inject
+    CityInteractor cityInteractor;
+
+    private Disposable weatherDisposable;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ((WeatherApplication) getApplication()).getAppComponent().inject(this);
+        App.getAppComponent().inject(this);
     }
 
     @Override
     public boolean onStartJob(final JobParameters job) {
-        mBackgroundTask = new UpdatingWeatherTask(job);
-        mBackgroundTask.execute();
-
+        weatherDisposable = cityInteractor.getCurrentCity()
+                .subscribe(city -> weatherInteractor.getCurrentWeather(city).subscribe());
         return true;
     }
 
     @Override
     public boolean onStopJob(JobParameters job) {
-        if (mBackgroundTask != null) {
-            mBackgroundTask.cancel(true);
-        }
+        Utils.dispose(weatherDisposable);
         return true;
     }
 
-    private class UpdatingWeatherTask extends AsyncTask<Void, Void, Void> {
-        private JobParameters mJobParameters;
-
-        public UpdatingWeatherTask(JobParameters jobParameters) {
-            mJobParameters = jobParameters;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            mWeatherManager.updateWeather();
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            jobFinished(mJobParameters, false);
-        }
-    }
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_about_root"
-    tools:context="com.aleksandersh.weather.fragment.AboutFragment">
+    tools:context="com.aleksandersh.weather.features.about.AboutFragment">
 
     <TextView
         android:id="@+id/app_name_text_view"

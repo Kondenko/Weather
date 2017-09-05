@@ -1,11 +1,96 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    <style name="AppTheme.Main.Toolbar" parent="AppTheme">
+        <item name="android:background">@color/colorPrimary</item>
     </style>
+
+    <style name="AppTheme.Main.Container" parent="AppTheme">
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
+    <style name="AppTheme.Drawer.Header" parent="AppTheme">
+        <item name="android:padding">@dimen/header_padding</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:gravity">bottom|start</item>
+        <item name="android:textColor">@color/colorHeaderText</item>
+    </style>
+
+    <style name="AppTheme.Weather.Card" parent="AppTheme">
+        <item name="cardBackgroundColor">@color/colorPrimary</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:layout_margin">@dimen/all_margin_small</item>
+    </style>
+
+
+    <style name="AppTheme.Weather.Temperature" parent="AppTheme">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Display1</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="AppTheme.Weather.Condition" parent="AppTheme">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Headline</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="AppTheme.Weather.Info.Title" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Body1</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="AppTheme.Weather.Info.Value" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Body2</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="AppTheme.Weather.Info.Error" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+
+    <style name="AppTheme.Weather.City" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Body1</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="AppTheme.Weather.Forecast.Text" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+
+    <style name="AppTheme.Weather.CityChooser.Header" parent="AppTheme">
+    </style>
+
+    <style name="AppTheme.Weather.CityChooser.Header.Title" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+    </style>
+
+    <style name="AppTheme.Weather.CityChooser.Header.City" parent="AppTheme">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Title</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
+    <style name="AppTheme.Weather.CityChooser.ListSelected.Item" parent="AppTheme">
+        <item name="android:paddingStart">@dimen/all_margin_regular</item>
+        <item name="android:paddingEnd">@dimen/all_margin_regular</item>
+        <item name="android:paddingBottom">@dimen/all_margin_small</item>
+        <item name="android:paddingTop">@dimen/all_margin_small</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+    <style name="AppTheme.Weather.CityChooser.ListSelected.CityName" parent="AppTheme.Weather.CityChooser.ListSelected.Item">
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
 
 </resources>

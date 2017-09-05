@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="city_chooser_height">200dp</dimen>
-    <dimen name="city_chooser_width">300dp</dimen>
-    <dimen name="city_chooser_padding">8dp</dimen>
-    <dimen name="city_chooser_textview_height">56dp</dimen>
-    <dimen name="city_chooser_dropdown_height">112dp</dimen>
+
+    <dimen name="all_elevation_toolbar">4dp</dimen>
+    <dimen name="all_size_icon">24dp</dimen>
+    <dimen name="all_margin_small">8dp</dimen>
+    <dimen name="all_margin_regular">16dp</dimen>
+
+
+
+    <dimen name="header_height">88dp</dimen>
+    <dimen name="header_padding">16dp</dimen>
+
+    <dimen name="weather_elevation_bottomsheet">8dp</dimen>
+    <dimen name="weather_size_info_icon">24dp</dimen>
+    <dimen name="weather_padding_info_text">8dp</dimen>
+
+    <dimen name="weather_forecast_height_item">56dp</dimen>
+    <dimen name="weather_forecast_size_icon">32dp</dimen>
+
+    <dimen name="weather_height_info_card">352dp</dimen>
+
+    <dimen name="citychooser_height_collapsed">?actionBarSize</dimen>
+    <dimen name="citychooser_height_expanded">400dp</dimen>
+    <dimen name="citychooser_padding_inner">8dp</dimen>
+    <dimen name="citychooser_margin_city">32dp</dimen>
+    <dimen name="citychooser_margin_side">16dp</dimen>
+    <dimen name="citychooser_height_header">96dp</dimen>
+    <dimen name="citychooser_height_logo">48dp</dimen>
+
 </resources>

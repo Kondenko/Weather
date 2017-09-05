@@ -18,7 +18,7 @@ public class CustomRebolectricTestRunner extends RobolectricTestRunner {
     protected Config buildGlobalConfig() {
         return new Config.Builder()
                 .setManifest("app/src/main/AndroidManifest.xml")
-                .setApplication(WeatherApplication.class)
+                .setApplication(App.class)
                 .build();
 
     }

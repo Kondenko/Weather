@@ -1,54 +1,48 @@
 package com.aleksandersh.weather.di.component;
 
-import com.aleksandersh.weather.WeatherApplication;
+
+import com.aleksandersh.weather.App;
 import com.aleksandersh.weather.di.module.AppModule;
-import com.aleksandersh.weather.di.module.CityModule;
-import com.aleksandersh.weather.di.module.DomainModule;
+import com.aleksandersh.weather.di.module.DataModule;
 import com.aleksandersh.weather.di.module.NetworkModule;
 import com.aleksandersh.weather.di.module.ServiceModule;
-import com.aleksandersh.weather.fragment.SettingsFragment;
-import com.aleksandersh.weather.fragment.WeatherFragment;
+import com.aleksandersh.weather.features.city.di.CityModule;
+import com.aleksandersh.weather.features.city.presentation.CityChooserFragment;
+import com.aleksandersh.weather.features.settings.SettingsFragment;
+import com.aleksandersh.weather.features.weather.di.WeatherModule;
+import com.aleksandersh.weather.features.weather.presentation.WeatherFragment;
 import com.aleksandersh.weather.service.WeatherUpdatingJobService;
-import com.aleksandersh.weather.utils.ApiKeyInterceptor;
 import com.aleksandersh.weather.utils.Const;
-import com.aleksandersh.weather.utils.PreferencesHelper;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
 import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by AleksanderSh on 21.07.2017.
  */
 
-@Component(modules = {AppModule.class, NetworkModule.class, ServiceModule.class, DomainModule.class})
 @Singleton
+@Component(modules = {
+        AppModule.class,
+        NetworkModule.class,
+        ServiceModule.class,
+        DataModule.class,
+        WeatherModule.class,
+        CityModule.class})
 public interface AppComponent {
 
-    CitySubcomponent plusCity(CityModule cityModule);
-
-    PreferencesHelper getPreferencesHelper();
-
-    GsonConverterFactory getGsonConverterFactory();
-
+    @Named(Const.DI_API_SCOPE_WEATHER)
     OkHttpClient getHttpClient();
 
-    StethoInterceptor getStethoInterceptor();
-
-    @Named(Const.DI_API_SCOPE_CITY)
-    ApiKeyInterceptor getApiKeyInterceptor();
-
-    @Named(Const.DI_API_SCOPE_CITY)
-    Retrofit getCityRetrofit();
-
-    void inject(WeatherApplication app);
+    void inject(App app);
 
     void inject(WeatherFragment fragment);
+
+    void inject(CityChooserFragment cityChooserFragment);
 
     void inject(SettingsFragment fragment);
 

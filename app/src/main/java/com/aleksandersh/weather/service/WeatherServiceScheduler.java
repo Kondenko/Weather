@@ -1,5 +1,6 @@
 package com.aleksandersh.weather.service;
 
+
 import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.Job;
@@ -9,6 +10,7 @@ import com.firebase.jobdispatcher.Trigger;
 
 import javax.inject.Inject;
 
+
 /**
  * Created by AleksanderSh on 18.07.2017.
  * <p>
@@ -16,7 +18,9 @@ import javax.inject.Inject;
  */
 
 public class WeatherServiceScheduler implements ServiceScheduler {
+
     private static final String TAG = "WeatherServiceScheduler";
+
     private static final int SYNC_FLEXTIME_SECONDS = 30;
 
     private FirebaseJobDispatcher mDispatcher;
@@ -43,7 +47,6 @@ public class WeatherServiceScheduler implements ServiceScheduler {
                 .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
                 .setConstraints(Constraint.ON_ANY_NETWORK)
                 .build();
-
         mDispatcher.mustSchedule(job);
     }
 
@@ -51,4 +54,5 @@ public class WeatherServiceScheduler implements ServiceScheduler {
     public void stopService() {
         mDispatcher.cancel(WeatherUpdatingJobService.TAG);
     }
+
 }

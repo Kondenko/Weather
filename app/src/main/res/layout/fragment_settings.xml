@@ -3,6 +3,6 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:id="@+id/fragment_settings_root"
-             tools:context="com.aleksandersh.weather.fragment.SettingsFragment">
+             tools:context="com.aleksandersh.weather.features.settings.SettingsFragment">
 
 </FrameLayout>

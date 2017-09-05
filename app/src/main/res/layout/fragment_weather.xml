@@ -1,189 +1,116 @@
-<android.support.v4.widget.SwipeRefreshLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/weather_swipe_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aleksandersh.weather.fragment.WeatherFragment"
+    android:clipToPadding="false"
+    tools:context="com.aleksandersh.weather.features.weather.presentation.WeatherFragment"
     >
 
-    <android.support.constraint.ConstraintLayout
+    <!--The bottom padding fixes this view's overlapping with the BottomSheet-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/weather_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="56dp"
         >
 
-        <TextView
-            android:id="@+id/city_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/weather_group_image_view"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:text="Moscow"
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <android.support.v7.widget.CardView
+                    style="@style/AppTheme.Weather.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/weather_height_info_card"
+                    app:contentPadding="@dimen/all_margin_small"
+                    >
+
+                    <include
+                        layout="@layout/layout_weather_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/weather_height_info_card"
+                        />
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    style="@style/AppTheme.Weather.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/weather_recyclerview_forecast"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--BottomSheetBehaviour won't work with references, so we're using hardcoded values -->
+    <FrameLayout
+        android:id="@+id/weather_bottomsheet"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@color/colorPrimary"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+        >
+
+        <fragment
+            android:id="@+id/weather_bottomsheet_fragment_citychooser"
+            android:name="com.aleksandersh.weather.features.city.presentation.CityChooserFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             />
 
-        <ImageView
-            android:id="@+id/weather_group_image_view"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/clear_icon"
-            app:layout_constraintBottom_toTopOf="@+id/temperature_text_view"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            />
+        <LinearLayout
+            android:id="@+id/weather_bottomsheet_layout_current_city"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            >
 
-        <TextView
-            android:id="@+id/temperature_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:textSize="64sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintHorizontal_weight="2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/pressure_title_text_view"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="+24"
-            />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:alpha="0.20"
+                app:srcCompat="@drawable/ic_all_city_black_24dp"
+                />
 
-        <TextView
-            android:id="@+id/weather_condition_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="@+id/temperature_text_view"
-            app:layout_constraintRight_toRightOf="@+id/temperature_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/temperature_text_view"
-            tools:text="Rain, snow Rain, snow Rain, snow Rain, "
-            />
+            <TextView
+                android:id="@+id/weather_textview_city"
+                style="@style/AppTheme.Weather.City"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="32dp"
+                tools:text="Moscow"
+                />
 
-        <TextView
-            android:id="@+id/pressure_title_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/pressure_title"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@+id/temperature_text_view"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.501"
-            tools:text="Pressure"
-            />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/pressure_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:textAlignment="center"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/pressure_title_text_view"
-            app:layout_constraintRight_toRightOf="@+id/pressure_title_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/pressure_title_text_view"
-            tools:text="1000"
-            />
 
-        <TextView
-            android:id="@+id/humidity_title_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/humidity_title"
-            android:textAlignment="center"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/pressure_title_text_view"
-            app:layout_constraintRight_toRightOf="@+id/pressure_title_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/pressure_text_view"
-            tools:text="Humidity"
-            />
+    </FrameLayout>
 
-        <TextView
-            android:id="@+id/humidity_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/pressure_title_text_view"
-            app:layout_constraintRight_toRightOf="@+id/pressure_title_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/humidity_title_text_view"
-            tools:text="80"
-            />
+</android.support.design.widget.CoordinatorLayout>
 
-        <TextView
-            android:id="@+id/cloudiness_title_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/cloudiness_title"
-            android:textAlignment="center"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/pressure_title_text_view"
-            app:layout_constraintRight_toRightOf="@+id/pressure_title_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/humidity_text_view"
-            tools:text="cloudiness"
-            />
-
-        <TextView
-            android:id="@+id/cloudiness_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/pressure_title_text_view"
-            app:layout_constraintRight_toRightOf="@+id/pressure_title_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/cloudiness_title_text_view"
-            tools:text="1000"
-            />
-
-        <TextView
-            android:id="@+id/error_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:textSize="18sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            />
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.SwipeRefreshLayout>

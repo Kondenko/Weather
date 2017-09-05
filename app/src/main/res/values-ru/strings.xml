@@ -18,8 +18,8 @@
     <string name="api_language_value">ru</string>
 
     <string name="default_city">Москва</string>
-    <string name="pressure_title">давление</string>
-    <string name="humidity_title">влажность</string>
-    <string name="cloudiness_title">облачность</string>
-    <string name="wind_title">ветер</string>
+    <string name="weather_info_title_pressure">Давление</string>
+    <string name="weather_info_title_humidity">Влажность</string>
+    <string name="weather_info_title_cloudiness">Облачность</string>
+    <string name="weather_header_wind">Ветер</string>
 </resources>
